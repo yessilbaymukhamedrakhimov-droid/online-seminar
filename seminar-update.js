@@ -127,6 +127,10 @@
     return `${head()}<div class="regional-toolbar"><label>${tr('Облыс','Область')}<select id="regional-area">${window.SEMINAR_REGIONAL_DATA.map(a=>`<option value="${a.id}" ${a.id===dataRegion?'selected':''}>${E(regionName(a.id))}</option>`).join('')}</select></label><label class="regional-search-label">${tr('Аудан, колледж немесе педагог','Район, колледж или педагог')}<input id="regional-search" type="search" value="${E(search)}" placeholder="${tr('Іздеу…','Поиск…')}"></label><label class="regional-filter"><input id="regional-inactive" type="checkbox" ${inactiveOnly?'checked':''}>${tr('Тек белсенді емес','Только неактивные')}</label></div>${metrics(r.totals)}<p class="regional-note">${r.districts.length} ${tr('аудан / қала','районов / городов')} · ${r.districts.reduce((n,d)=>n+d.colleges.length,0)} ${tr('колледж','колледжей')} · ${count} ${tr('педагог жазбасы','записей педагогов')}. ${tr('Жиынтықтар Excel-дегі Total жолдарынан алынған. Бастапқы 2 мәндері сақталған. Қызыл түс — белгі жоқ; белсенділік лицензияны қолдану бағанымен анықталады.','Итоги взяты из строк Total в Excel. Исходные значения 2 сохранены. Красный цвет — нет отметки; активность определяется по использованию лицензии.')}</p><div id="regional-results">${dataResults()}</div>`;
   }
   const oldContent=content;
+  function projectNews(){
+    const countries=lang==='kz'?['Қазақстан','Эстония','Сингапур','Біріккен Араб Әмірліктері','Иордания','Грекия']:['Казахстан','Эстония','Сингапур','Объединённые Арабские Эмираты','Иордания','Греция'];
+    return `<article class="project-news-detail"><img class="project-news-photo" src="seminar-assets/edu-for-countries-news.jpeg" alt="${tr('Edu for Countries туралы ресми жаңалықтағы фото','Фотография из официальной новости об Edu for Countries')}"><span class="soft-label">${tr('Ғылым және жоғары білім министрлігі · 21.01.2026','Министерство науки и высшего образования · 21.01.2026')}</span><h3>${tr('Қазақстан — Edu for Countries алғашқы легінде','Казахстан — в первой группе Edu for Countries')}</h3><p>${tr('Қазақстан бағдарламаға Орталық Азиядан бірінші болып қосылды. Елде 165 000 тегін ChatGPT Edu лицензиясын беру көзделген. Жоба жеке қаражат есебінен іске асырылады.','Казахстан стал первым участником программы из Центральной Азии. В стране предусмотрено предоставление 165 000 бесплатных лицензий ChatGPT Edu. Проект финансируется за счёт частных средств.')}</p><h4>${tr('Алғашқы лекке қатысушы елдер','Страны первой группы')}</h4><ul class="project-news-countries">${countries.map(country=>`<li>${E(country)}</li>`).join('')}</ul>${link(tr('GOV.KZ · Толық жаңалық','GOV.KZ · Читать новость'),'https://www.gov.kz/org/sci/press/news/details/1145159?lang=kk','action secondary')}</article>`;
+  }
   content=function(){
     if(idx===ids.regions&&selected==='atyrau'&&!showRegionChoices){
       const workbook='https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQD3Az2fXryfQr5NAssvPvnKAfcTaHvH8H5vULIJNPSpOf8';
@@ -147,7 +151,7 @@
       if(idx===18)return `${head()}${tabs([['steps',tr('Іске қосу қадамдары','Шаги активации')],['video',tr('Бейненұсқаулық','Видеоинструкция')]],'activation')}${R.activation==='video'?media('youtube','youtube13'):baseContent().replace(head(),'')}`;
     }
     let result=oldContent();
-    if(idx===4)result=result.replace('</header>','</header>'+`<aside class="project-news"><div><span class="soft-label">${tr('Ресми жаңалық · 21.01.2026','Официальная новость · 21.01.2026')}</span><p>${tr('Қазақстан OpenAI Edu for Countries бағдарламасының алғашқы легіне және Орталық Азиядан бірінші болып қосылды. Елде 165 000 тегін ChatGPT Edu лицензиясын беру көзделген. Жоба жеке қаражат есебінен іске асырылады.','Казахстан вошёл в первую группу OpenAI Edu for Countries, став первым участником из Центральной Азии. В стране предусмотрено предоставление 165 000 бесплатных лицензий ChatGPT Edu. Проект финансируется за счёт частных средств.')}</p></div><a href="https://www.gov.kz/org/sci/press/news/details/1145159?lang=kk" target="_blank" rel="noopener noreferrer">${tr('ҒЖБМ · Толық жаңалық','МНВО · Читать новость')}${I('link')}</a></aside>`);
+    if(idx===4)result=`<div class="project-news-entry"><button class="action secondary" data-seminar="project-news">${I('note')}${tr('Ресми жаңалық · Edu for Countries','Официальная новость · Edu for Countries')}${I('arrow')}</button></div>`+result;
     if(idx===24)result=result.replace('<p class="champions-cta">',`<a class="champions-channel-qr" href="https://t.me/CHATGPTEDU_COLLEGES" target="_blank" rel="noopener noreferrer"><img src="seminar-assets/college-telegram-qr.png" alt="${tr('Колледж педагогтеріне арналған Telegram арнасының QR-коды','QR-код Telegram-канала для педагогов колледжей')}"><span>@CHATGPTEDU_COLLEGES ${I('link')}</span></a><p class="champions-cta">`);
     if(idx===0)result+=`<button class="jeremy-button" data-seminar="video">${I('play')}<span><strong>Jeremy Utley</strong><small>Instructor @ Stanford Online &amp; Harvard Continuing Ed</small></span></button>`;
     if(enabled()&&idx===24)result=result.replace(/(<p class="champions-cta">[\s\S]*?<\/p>)/,`$1<p class="pr-campaign">${tr('PR-кампания: белсенді қолданушыларды іздейміз','PR-кампания: ищем активных пользователей')}</p>`);
@@ -175,6 +179,10 @@
       search='';inactiveOnly=false;showRegionChoices=false;R.activation=enabled()?'steps':'video';rebuild();go(selected==='atyrau'?ids.regions:enabled()?ids.meet:7);return;
     }
     const b=e.target.closest('[data-seminar]');if(!b)return;
+    if(b.dataset.seminar==='project-news'){
+      modal(tr('Ресми жаңалық · Edu for Countries','Официальная новость · Edu for Countries'),projectNews());
+      document.querySelector('#modal').classList.add('project-news-modal');
+    }
     if(b.dataset.seminar==='change-region'){showRegionChoices=true;go(ids.regions);}
     if(b.dataset.seminar==='video'){
       modal('Jeremy Utley',`<video class="jeremy-player" controls playsinline preload="metadata" src="seminar-assets/jeremy-utley.mp4"></video><p class="input-note jeremy-full-video">${tr('Толық видео YouTube-та қолжетімді','Полное видео доступно на YouTube')}:<br><span>How to Master AI Powered Creativity in Just 13 Minutes | Jeremy Utley</span></p>`);
@@ -187,6 +195,7 @@
     }
   });
   document.getElementById('modal').addEventListener('close',()=>{
+    document.querySelector('#modal').classList.remove('project-news-modal');
     document.querySelector('#modal video')?.pause();document.querySelector('#modal').classList.remove('seminar-video-modal');
   });
   document.addEventListener('input',e=>{if(e.target.id==='regional-search'){search=e.target.value;document.getElementById('regional-results').innerHTML=dataResults();}});
