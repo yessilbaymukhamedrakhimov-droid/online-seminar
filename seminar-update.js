@@ -19,7 +19,7 @@
   const extraIds=new Set(Object.values(ids).filter(x=>x!==ids.regions));
   const originalChapters=CHAPTERS.map(c=>({...c,slides:[...c.slides]}));
   const initialHash=window.VACANCY_INITIAL_HASH||location.hash;
-  let selected='';
+  let selected='',showRegionChoices=false;
   try{selected=new URL(location.href).searchParams.get('region')||localStorage.getItem('seminar-region')||'';}catch{}
   if(!regions.some(r=>r[0]===selected))selected='';
   const enabled=()=>enhanced.has(selected);
@@ -128,6 +128,11 @@
   }
   const oldContent=content;
   content=function(){
+    if(idx===ids.regions&&selected==='atyrau'&&!showRegionChoices){
+      const workbook='https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQD3Az2fXryfQr5NAssvPvnKAfcTaHvH8H5vULIJNPSpOf8';
+      const title=tr('Атырау облысы — лицензияны пайдаланбайтын педагогтер','Атырауская область — не используют лицензию');
+      return `<header class="slide-head"><h2>${E(title)}</h2></header><div class="atyrau-workbook-actions"><button class="action secondary" data-seminar="change-region">${tr('Өңірді өзгерту','Сменить регион')}${I('arrow')}</button>${link(tr('Кестені бөлек ашу','Открыть таблицу отдельно'),workbook,'action secondary')}</div><iframe class="atyrau-workbook" title="${E(title)}" src="${E(workbook+'?action=embedview&wdAllowInteractivity=True&wdHideGridlines=True')}" allowfullscreen></iframe>`;
+    }
     if(idx===ids.regions)return `${head()}<div class="region-grid">${regions.map((r,j)=>`<button class="region-choice" data-region="${r[0]}" aria-pressed="${selected===r[0]}"><span class="region-number">${String(j+1).padStart(2,'0')}</span><span>${E(regionName(r[0]))}</span>${selected===r[0]?I('check'):I('arrow')}</button>`).join('')}</div>`;
     if(enabled()){
       if(idx===ids.meet)return activityView('meet');
@@ -165,10 +170,10 @@
       selected=choice.dataset.region;try{localStorage.setItem('seminar-region',selected);}catch{}
       const url=new URL(location.href);url.searchParams.set('region',selected);history.replaceState(null,'',url);
       if(['turkestan','kyzylorda'].includes(selected))dataRegion=selected;
-      search='';inactiveOnly=false;R.activation=enabled()?'steps':'video';rebuild();go(enabled()?ids.meet:7);return;
+      search='';inactiveOnly=false;showRegionChoices=false;R.activation=enabled()?'steps':'video';rebuild();go(selected==='atyrau'?ids.regions:enabled()?ids.meet:7);return;
     }
     const b=e.target.closest('[data-seminar]');if(!b)return;
-    if(b.dataset.seminar==='change-region')go(ids.regions);
+    if(b.dataset.seminar==='change-region'){showRegionChoices=true;go(ids.regions);}
     if(b.dataset.seminar==='video'){
       modal('Jeremy Utley',`<video class="jeremy-player" controls playsinline preload="metadata" src="seminar-assets/jeremy-utley.mp4"></video><p class="input-note jeremy-full-video">${tr('Толық видео YouTube-та қолжетімді','Полное видео доступно на YouTube')}:<br><span>How to Master AI Powered Creativity in Just 13 Minutes | Jeremy Utley</span></p>`);
       document.querySelector('#modal').classList.add('seminar-video-modal');
