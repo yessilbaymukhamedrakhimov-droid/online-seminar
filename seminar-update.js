@@ -147,6 +147,7 @@
       if(idx===18)return `${head()}${tabs([['steps',tr('Іске қосу қадамдары','Шаги активации')],['video',tr('Бейненұсқаулық','Видеоинструкция')]],'activation')}${R.activation==='video'?media('youtube','youtube13'):baseContent().replace(head(),'')}`;
     }
     let result=oldContent();
+    if(idx===24)result=result.replace('<p class="champions-cta">',`<a class="champions-channel-qr" href="https://t.me/CHATGPTEDU_COLLEGES" target="_blank" rel="noopener noreferrer"><img src="seminar-assets/college-telegram-qr.png" alt="${tr('Колледж педагогтеріне арналған Telegram арнасының QR-коды','QR-код Telegram-канала для педагогов колледжей')}"><span>@CHATGPTEDU_COLLEGES ${I('link')}</span></a><p class="champions-cta">`);
     if(idx===0)result+=`<button class="jeremy-button" data-seminar="video">${I('play')}<span><strong>Jeremy Utley</strong><small>Instructor @ Stanford Online &amp; Harvard Continuing Ed</small></span></button>`;
     if(enabled()&&idx===24)result=result.replace(/(<p class="champions-cta">[\s\S]*?<\/p>)/,`$1<p class="pr-campaign">${tr('PR-кампания: белсенді қолданушыларды іздейміз','PR-кампания: ищем активных пользователей')}</p>`);
     if(enabled()&&idx===7)result=result.replace(/<nav class="r-tabs"[\s\S]*?<\/nav>/,modesTabs());

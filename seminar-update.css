@@ -1,4 +1,8 @@
 /* Additions use the existing Bilim blue/teal palette and presentation shell. */
+.champions-channel-qr{display:flex;flex-direction:column;align-items:center;width:min(100%,300px);margin:20px auto 0;border:1px solid #dce3ef;border-radius:18px;overflow:hidden;background:#fff;color:#3559e0;text-decoration:none}
+.champions-channel-qr img{display:block;width:100%;aspect-ratio:5/6;object-fit:cover;object-position:center 48%}
+.champions-channel-qr>span{display:flex;align-items:center;gap:8px;padding:10px;font-size:14px;font-weight:700}
+.champions-channel-qr svg{width:16px;height:16px}
 .atyrau-workbook-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
 .atyrau-workbook-actions .action{min-height:42px;padding:10px 16px;font-size:14px}
 .atyrau-workbook{display:block;width:100%;height:max(420px,calc(100dvh - 330px));border:1px solid #dce3ef;border-radius:16px;background:#fff}
