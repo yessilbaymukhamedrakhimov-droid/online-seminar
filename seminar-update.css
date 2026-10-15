@@ -1,4 +1,9 @@
 /* Additions use the existing Bilim blue/teal palette and presentation shell. */
+.project-news{display:flex;align-items:center;gap:24px;padding:18px 22px;margin:0 0 24px;border:1px solid #cbe5e2;border-left:4px solid #07998d;border-radius:16px;background:#f0faf8}
+.project-news p{margin:8px 0 0;font-size:16px;line-height:1.55;color:#34465e}
+.project-news>a{display:flex;align-items:center;gap:8px;flex-shrink:0;font-size:14px;font-weight:650;color:#087e74}
+.project-news>a svg{width:17px;height:17px}
+@media(max-width:760px){.project-news{align-items:flex-start;flex-direction:column;gap:12px;padding:16px}.project-news p{font-size:15px}}
 .champions-channel-qr{display:flex;flex-direction:column;align-items:center;width:min(100%,300px);margin:20px auto 0;border:1px solid #dce3ef;border-radius:18px;overflow:hidden;background:#fff;color:#3559e0;text-decoration:none}
 .champions-channel-qr img{display:block;width:100%;aspect-ratio:5/6;object-fit:cover;object-position:center 48%}
 .champions-channel-qr>span{display:flex;align-items:center;gap:8px;padding:10px;font-size:14px;font-weight:700}
