@@ -1,15 +1,16 @@
 /* Additions use the existing Bilim blue/teal palette and presentation shell. */
-.project-news-entry{display:flex;justify-content:flex-end;margin-bottom:18px}
-.project-news-entry .action{font-size:14px;min-height:42px;padding:10px 16px;white-space:normal;text-align:left}
-.project-news-modal{width:min(960px,96vw)}
-.project-news-photo{display:block;width:100%;height:auto;max-height:44vh;object-fit:contain;background:#eef2f8;border-radius:16px;margin-bottom:20px}
-.project-news-detail h3{font-size:26px;line-height:1.25;margin:12px 0}
-.project-news-detail p{font-size:17px;line-height:1.6;color:#45536b;margin:0 0 20px}
-.project-news-detail h4{font-size:18px;margin:20px 0 12px}
-.project-news-countries{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0 0 24px}
-.project-news-countries li{padding:10px 15px;border:1px solid #d4dff6;border-radius:12px;background:#f0f4ff;color:#304b9b;font-size:15px;font-weight:650}
+.project-start{padding:24px;margin:0 0 28px;border:1px solid #d7e3ef;border-radius:22px;background:linear-gradient(135deg,#fff,#f0f7fc)}
+.project-start-main{display:grid;grid-template-columns:minmax(230px,.9fr) minmax(0,1.3fr);align-items:center;gap:24px}
+.project-news-photo{display:block;width:100%;height:auto;border-radius:15px}
+.project-start h3{font-size:28px;line-height:1.2;margin:10px 0 14px}
+.project-start p{font-size:16px;line-height:1.6;color:#45536b;margin:0 0 12px}
+.project-start h4{font-size:16px;margin:18px 0 10px}
+.project-news-countries{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0 0 12px}
+.project-news-countries li{padding:8px 12px;border:1px solid #d4dff6;border-radius:10px;background:#f0f4ff;color:#304b9b;font-size:13px;font-weight:650}
 .project-news-countries li:first-child{background:#e2f5f0;border-color:#afdcd0;color:#087565}
-@media(max-width:760px){.project-news-entry{justify-content:flex-start}.project-news-detail h3{font-size:22px}.project-news-detail p{font-size:15px}}
+.project-start-source{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#65758e}
+.project-start-source svg{width:14px;height:14px}
+@media(max-width:760px){.project-start{padding:18px}.project-start-main{grid-template-columns:1fr;gap:16px}.project-start h3{font-size:24px}.project-start p{font-size:15px}}
 .champions-channel-qr{display:flex;flex-direction:column;align-items:center;width:min(100%,300px);margin:20px auto 0;border:1px solid #dce3ef;border-radius:18px;overflow:hidden;background:#fff;color:#3559e0;text-decoration:none}
 .champions-channel-qr img{display:block;width:100%;aspect-ratio:5/6;object-fit:cover;object-position:center 48%}
 .champions-channel-qr>span{display:flex;align-items:center;gap:8px;padding:10px;font-size:14px;font-weight:700}
