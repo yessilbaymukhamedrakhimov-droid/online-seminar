@@ -106,12 +106,7 @@
   const inactive=p=>!(Number(p.values[3])>0);
   const number=v=>v==null?'—':E(v);
   function metrics(totals,cls=''){return `<div class="regional-metrics ${cls}">${metricLabels().map((s,j)=>`<div><strong>${number(totals[j])}</strong><span>${s}</span></div>`).join('')}</div>`;}
-  function dataset(){return idx===ids.regions&&selected==='kostanay'?window.SEMINAR_KOSTANAY_DATA:window.SEMINAR_REGIONAL_DATA.find(r=>r.id===dataRegion);}
-  function kostanayReport(){
-    const report=window.SEMINAR_KOSTANAY_DATA;
-    const count=report.districts.flatMap(people).length;
-    return `<header class="slide-head"><h2 id="slide-title">${tr('Қостанай облысы — лицензияны пайдаланбайтын педагогтер','Костанайская область — не используют лицензию')}</h2><p class="subtitle">${count} ${tr('педагог','педагогов')} · ${report.districts.length} ${tr('аудан / қала','районов / городов')} · ${report.districts.reduce((sum,d)=>sum+d.colleges.length,0)} ${tr('колледж','колледжа')}</p></header><div class="regional-toolbar"><button class="action secondary" data-seminar="change-region">${tr('Өңірді өзгерту','Сменить регион')}${I('arrow')}</button><label class="regional-search-label">${tr('Аудан, колледж немесе педагог','Район, колледж или педагог')}<input id="regional-search" type="search" value="${E(search)}" placeholder="${tr('Іздеу…','Поиск…')}"></label></div><p class="regional-note">${tr('Excel файлындағы «Лицензияны қолданады» бағанында белгісі жоқ жазбалар ғана көрсетілген. Аудан мен колледжді басып, педагогтер тізімін ашыңыз. Көрсеткіштер осы жазбалар бойынша есептелген.','Показаны только записи без отметки в столбце «Используют лицензию» исходного Excel. Нажмите на район и колледж, чтобы раскрыть список педагогов. Показатели рассчитаны по этим записям.')}</p><div id="regional-results">${dataResults()}</div>`;
-  }
+  function dataset(){return window.SEMINAR_REGIONAL_DATA.find(r=>r.id===dataRegion);}
   function dataResults(){
     const r=dataset(),q=search.trim().toLocaleLowerCase();let shown=0;
     const districts=r.districts.map((d,di)=>{
@@ -137,10 +132,9 @@
     return `<article class="project-start"><div class="project-start-main"><img class="project-news-photo" src="seminar-assets/edu-for-countries-news.jpeg" alt="${tr('Жоба туралы ресми жаңалықтағы фото','Фото из официальной новости о проекте')}"><div><span class="soft-label">OpenAI · Freedom Holding Corp. · Bilim Group</span><h3>${tr('Жобаның басталуы','Начало проекта')}</h3><p>${tr('Жоба 2025 жылғы 6 қарашада АҚШ-та қол қойылған меморандум аясындағы келісімдерге негізделген. 2026 жылғы 21 қаңтарда Қазақстанның Edu for Countries алғашқы легіне қосылғаны жарияланды — Орталық Азиядан бірінші болып.','Основой проекта стали договорённости в рамках меморандума, подписанного 6 ноября 2025 года в США. 21 января 2026 года объявлено о включении Казахстана в первую группу Edu for Countries — первым из Центральной Азии.')}</p><p>${tr('165 000 тегін ChatGPT Edu лицензиясын, соның ішінде Қазақстан педагогтеріне беру көзделген. Қаржыландыру — жеке қаражат есебінен.','Предусмотрено предоставление 165 000 бесплатных лицензий ChatGPT Edu педагогам Казахстана. Финансирование — за счёт частных средств.')}</p></div></div><h4>${tr('Алғашқы лекке қатысушы елдер','Страны первой группы')}</h4><ul class="project-news-countries">${countries.map(country=>`<li>${E(country)}</li>`).join('')}</ul><a class="project-start-source" href="https://www.gov.kz/org/sci/press/news/details/1145159?lang=kk" target="_blank" rel="noopener noreferrer">${tr('Дереккөз: ҒЖБМ · 21.01.2026','Источник: МНВО · 21.01.2026')}${I('link')}</a></article>`;
   }
   content=function(){
-    if(idx===ids.regions&&selected==='kostanay'&&!showRegionChoices)return kostanayReport();
-    if(idx===ids.regions&&selected==='atyrau'&&!showRegionChoices){
-      const workbook='https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQD3Az2fXryfQr5NAssvPvnKAfcTaHvH8H5vULIJNPSpOf8';
-      const title=tr('Атырау облысы — лицензияны пайдаланбайтын педагогтер','Атырауская область — не используют лицензию');
+    if(idx===ids.regions&&['atyrau','kostanay'].includes(selected)&&!showRegionChoices){
+      const workbook=selected==='kostanay'?'https://onedrive.live.com/:x:/g/personal/7439EB7CE95BB850/IQCUBpc0OTlZSKbw85SePdUCAWRuQkxpGqcDglbihQOvSzE':'https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQD3Az2fXryfQr5NAssvPvnKAfcTaHvH8H5vULIJNPSpOf8';
+      const title=regionName()+' — '+tr('лицензияны пайдаланбайтын педагогтер','не используют лицензию');
       return `<header class="slide-head"><h2>${E(title)}</h2></header><div class="atyrau-workbook-actions"><button class="action secondary" data-seminar="change-region">${tr('Өңірді өзгерту','Сменить регион')}${I('arrow')}</button>${link(tr('Кестені бөлек ашу','Открыть таблицу отдельно'),workbook,'action secondary')}</div><iframe class="atyrau-workbook" title="${E(title)}" src="${E(workbook+'?action=embedview&wdAllowInteractivity=True&wdHideGridlines=True')}" allowfullscreen></iframe>`;
     }
     if(idx===ids.regions)return `${head()}<div class="region-grid">${regions.map((r,j)=>`<button class="region-choice" data-region="${r[0]}" aria-pressed="${selected===r[0]}"><span class="region-number">${String(j+1).padStart(2,'0')}</span><span>${E(regionName(r[0]))}</span>${selected===r[0]?I('check'):I('arrow')}</button>`).join('')}</div>`;
