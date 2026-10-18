@@ -3,6 +3,11 @@
 .usage-limit-summary h3{font-size:22px;margin:0 0 8px}
 .usage-culture p{font-size:16px;line-height:1.5;margin:0;color:#536078}
 .usage-rules{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.usage-windows{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.usage-windows article{border:1px solid #d9e3f3;border-radius:14px;padding:16px 20px;background:#f4f7ff}
+.usage-windows strong{display:block;font-size:19px;color:#304e97;margin-bottom:8px}
+.usage-culture .usage-windows-note{font-size:13px;color:#6a768b;margin:10px 0 18px}
+@media(max-width:650px){.usage-windows{grid-template-columns:1fr}}
 .usage-proverb .usage-rules{grid-template-columns:repeat(3,minmax(0,1fr))}
 .usage-proverb .usage-limit-summary{background:#eaf7f3;border-color:#c9e7de}
 .usage-proverb .usage-limit-summary h3{font-size:30px;color:#175a4d;margin:10px 0}
