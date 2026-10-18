@@ -11,6 +11,9 @@
 .usage-proverb .usage-rules{grid-template-columns:repeat(3,minmax(0,1fr))}
 .usage-proverb .usage-limit-summary{background:#eaf7f3;border-color:#c9e7de}
 .usage-proverb .usage-limit-summary h3{font-size:30px;color:#175a4d;margin:10px 0}
+.usage-paid-message{padding:14px 18px;margin:14px 0;border-radius:12px;background:#fff9e8;border:1px solid #ecddb3}
+.usage-paid-message>strong{display:block;font-size:23px;color:#765716;margin-bottom:8px}
+.usage-paid-message p{color:#635436}
 @media(max-width:900px){.usage-proverb .usage-rules{grid-template-columns:1fr}.usage-proverb .usage-limit-summary h3{font-size:26px}}
 .usage-rules article{display:flex;gap:14px;align-items:flex-start;padding:18px;border:1px solid #dce3ef;border-radius:16px;background:#fff}
 .usage-rule-number{flex:none;display:grid;place-items:center;width:32px;height:32px;background:#e6f5f2;border-radius:9px;color:#078778;font-size:14px;font-weight:800}
