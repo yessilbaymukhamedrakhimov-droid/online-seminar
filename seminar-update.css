@@ -1,4 +1,13 @@
 /* Additions use the existing Bilim blue/teal palette and presentation shell. */
+.org-history-tab>svg{width:44px;height:44px;flex:none;padding:8px;color:#009c91;background:#e6f5f2;border-radius:12px}
+.org-history-tab[aria-pressed=true]>svg{color:#fff;background:#ffffff24}
+.org-stage.org-history-stage{padding:24px;border-radius:28px;overflow:auto}
+.org-history-stage .project-start{padding:0;margin:0;border:0;border-radius:0;background:none}
+.org-history-stage .project-start-main{grid-template-columns:1fr;gap:16px}
+.org-history-stage .project-news-photo{max-height:210px;object-fit:contain;background:#eef3f7}
+.org-history-stage .project-start h3{font-size:25px;margin:8px 0 12px}
+.org-history-stage .project-start p{font-size:15px;line-height:1.5}
+.org-history-stage .project-news-countries li{font-size:12px;padding:7px 10px}
 .svg-mini h3{font-size:24px;margin:0 0 16px}
 .svg-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .svg-mini-grid figure{margin:0;overflow:hidden;border:1px solid #dce4ed;border-radius:14px;background:white}
