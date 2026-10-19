@@ -145,8 +145,8 @@
 
   content=function(){
     if(idx===7&&R.mode==='usage')return head()+modesTabs()+usageCultureView();
-    if(idx===ids.regions&&['atyrau','kostanay','aktobe','almaty-region'].includes(selected)&&!showRegionChoices){
-      const workbook=selected==='almaty-region'?'https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQCW2jtwjbUjT7bAJOk37Zn6ATTF1W3s1SQPmM4F5886YeQ':selected==='aktobe'?'https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQDtb0Y-l7RaRoK5s5NlVsGTAd1M9R-KueMYhoRgZW6IfLE':selected==='kostanay'?'https://onedrive.live.com/:x:/g/personal/7439EB7CE95BB850/IQCUBpc0OTlZSKbw85SePdUCAWRuQkxpGqcDglbihQOvSzE':'https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQD3Az2fXryfQr5NAssvPvnKAfcTaHvH8H5vULIJNPSpOf8';
+    if(idx===ids.regions&&['atyrau','kostanay','aktobe','almaty-region','east'].includes(selected)&&!showRegionChoices){
+      const workbook=selected==='east'?'https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQAbjhe_ZRl8TLLZC5g7RIEdAeerECeMXyL848agiUiYizU':selected==='almaty-region'?'https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQCW2jtwjbUjT7bAJOk37Zn6ATTF1W3s1SQPmM4F5886YeQ':selected==='aktobe'?'https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQDtb0Y-l7RaRoK5s5NlVsGTAd1M9R-KueMYhoRgZW6IfLE':selected==='kostanay'?'https://onedrive.live.com/:x:/g/personal/7439EB7CE95BB850/IQCUBpc0OTlZSKbw85SePdUCAWRuQkxpGqcDglbihQOvSzE':'https://onedrive.live.com/:x:/g/personal/7439eb7ce95bb850/IQD3Az2fXryfQr5NAssvPvnKAfcTaHvH8H5vULIJNPSpOf8';
       const title=regionName()+' — '+tr('лицензияны пайдаланбайтын педагогтер','не используют лицензию');
       return `<header class="slide-head"><h2>${E(title)}</h2></header><div class="atyrau-workbook-actions"><button class="action secondary" data-seminar="change-region">${tr('Өңірді өзгерту','Сменить регион')}${I('arrow')}</button>${link(tr('Кестені бөлек ашу','Открыть таблицу отдельно'),workbook,'action secondary')}</div><iframe class="atyrau-workbook" title="${E(title)}" src="${E(workbook+'?action=embedview&wdAllowInteractivity=True&wdHideGridlines=True')}" allowfullscreen></iframe>`;
     }
@@ -190,7 +190,7 @@
       selected=choice.dataset.region;try{localStorage.setItem('seminar-region',selected);}catch{}
       const url=new URL(location.href);url.searchParams.set('region',selected);history.replaceState(null,'',url);
       if(['turkestan','kyzylorda'].includes(selected))dataRegion=selected;
-      search='';inactiveOnly=false;showRegionChoices=false;R.activation=enabled()?'steps':'video';rebuild();go(['atyrau','kostanay','aktobe','almaty-region'].includes(selected)?ids.regions:enabled()?ids.meet:7);return;
+      search='';inactiveOnly=false;showRegionChoices=false;R.activation=enabled()?'steps':'video';rebuild();go(['atyrau','kostanay','aktobe','almaty-region','east'].includes(selected)?ids.regions:enabled()?ids.meet:7);return;
     }
     const b=e.target.closest('[data-seminar]');if(!b)return;
     if(b.dataset.seminar==='change-region'){showRegionChoices=true;go(ids.regions);}
